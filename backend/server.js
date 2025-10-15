@@ -10,8 +10,8 @@ app.use(cors());
 // Test route to confirm server works
 app.get("/api/test", (req, res) => {
   res.json([
-    { title: "Test Task 1", description: "Do this first"},
-    { title: "Test Task 2", description: "Do this next" }
+    { title: "Test Task 1", description: "Do this first",deadline: "2025-11-20"},
+    { title: "Test Task 2", description: "Do this next",deadline:"2025-11-25" }
   ]);
 });
 
@@ -30,7 +30,7 @@ app.post("/api/subtasks", async (req, res) => {
     // If the function returns nothing, send dummy data to prevent frontend failure
     if (!subtasks || subtasks.length === 0) {
       return res.json([
-        { title: "Sample Subtask 1", description: "Sample description" }
+        { title: "Sample Subtask 1", description: "Sample description",deadline:projectDueDate}
       ]);
     }
 
@@ -45,4 +45,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () =>
   console.log(`✅ Server running on http://localhost:${PORT}`)
 );
+
 
