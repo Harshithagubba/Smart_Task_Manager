@@ -5,6 +5,7 @@ const { GoogleGenerativeAI } = require("@google/generative-ai");
 // ✅ Initialize Gemini API client using .env key
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" }); // stable model
+const today=new Date();
 
 async function generateSubtasks(projectTitle, projectDueDate) {
   const prompt = `
@@ -15,6 +16,7 @@ generate 3–5 meaningful subtasks.
 Each subtask must include:
 - title
 - short description
+-realistic estimated deadline BETWEEN today (${today}) and ${projectDueDate}
 Return the result strictly in valid JSON format like:
 [
   { "title": "Subtask 1", "description": "..."  },
@@ -45,3 +47,4 @@ Return the result strictly in valid JSON format like:
 }
 
 module.exports = { generateSubtasks };
+
